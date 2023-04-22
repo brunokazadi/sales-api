@@ -1,0 +1,27 @@
+# Build the Go Binary
+FROM golang:1.19 as build_sales-api
+ENV CGO_ENABLED 0
+ARG BUILD_REF
+
+
+#Copy the source code into the container.
+COPY . /sales-api
+
+# Build the service binary
+WORKDIR /sales-api/app/services/salesApi
+RUN go build -ldflags "-X main.build=${BUILD_REF}"
+
+# Run the Go Binary in Alpine.
+FROM alpine:3.14
+ARG BUILD_DATE
+ARG BUILD_REF
+COPY --from=build_sales-api /sales-api/app/services/salesApi sales-api/salesApi
+WORKDIR /sales-api
+CMD ["./sales-api"]
+
+LABEL org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.title="sales-api" \
+      org.opencontainers.image.authors="Bruno Kazadi <kbrunojr55@gmail.com>" \
+      org.opencontainers.image.source="https://github.com/BrunoKazadi/service/app/sales-api" \
+      org.opencontainers.image.revision="${BUILD_REF}" \
+      org.opencontainers.image.vendor="ArtCoded"
