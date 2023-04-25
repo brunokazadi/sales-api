@@ -25,7 +25,7 @@ spec:
         image: sales-api-image
         ports:
         - name: sales-api
-          containerPort: 3000
+          containerPort: 3030
         - name: sales-api-debug
           containerPort: 8080
         
@@ -41,7 +41,7 @@ spec:
     app: sales
   ports:
   - name: sales-api
-    port: 3000
+    port: 3030
     targetPort: sales-api
   - name: sales-api-debug
     port: 8080
