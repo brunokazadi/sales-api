@@ -4,11 +4,13 @@ github.com/ardanlabs/conf/v3
 # github.com/dimfeld/httptreemux/v5 v5.5.0
 ## explicit; go 1.9
 github.com/dimfeld/httptreemux/v5
-# go.opentelemetry.io/otel v1.14.0
-## explicit; go 1.18
-go.opentelemetry.io/otel/attribute
-go.opentelemetry.io/otel/internal
-go.opentelemetry.io/otel/internal/attribute
+# github.com/google/go-cmp v0.5.9
+## explicit; go 1.13
+# github.com/google/uuid v1.3.0
+## explicit
+github.com/google/uuid
+# github.com/stretchr/testify v1.8.2
+## explicit; go 1.13
 # go.uber.org/atomic v1.7.0
 ## explicit; go 1.13
 go.uber.org/atomic

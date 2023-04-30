@@ -5,7 +5,7 @@ SHELL := /bin/bash
 
 # Access metrics directly (8080) or through the sidecar (3001)
 # expvarmon -ports=":8080" -vars="build,requests,goroutines,errors,panics,mem:memstats.Alloc"
-# expvarmon -ports=":3001" -endpoint="/metrics" -vars="build,requests,goroutines,errors,panics,mem:memstats.Alloc"
+# expvarmon -ports=":3030" -vars="build,requests,goroutines,errors,panics,mem:memstats.Alloc"
 
 # Used to install expvarmon program for metrics dashboard.
 # go install github.com/divan/expvarmon@latest

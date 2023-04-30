@@ -11,6 +11,7 @@ import (
 
 	"github.com/BrunoKazadi/sales-api/app/services/salesApi/handlers/debug/checkgrp"
 	"github.com/BrunoKazadi/sales-api/app/services/salesApi/handlers/v1/testgrp"
+	"github.com/BrunoKazadi/sales-api/business/web/mid"
 	"github.com/BrunoKazadi/sales-api/foundation/web"
 	"go.uber.org/zap"
 )
@@ -62,7 +63,13 @@ type APIMuxConfig struct {
 func APIMux(cfg APIMuxConfig) *web.App {
 	//mux := httptreemux.NewContextMux()
 
-	app := web.NewApp(cfg.Shutdown)
+	app := web.NewApp(
+		cfg.Shutdown,
+		mid.Logger(cfg.Log),
+		mid.Errors(cfg.Log),
+		mid.Metrics(),
+		mid.Panics(),
+	)
 
 	// Load the routes for the different version of the API
 	v1(app, cfg)
@@ -79,4 +86,5 @@ func v1(app *web.App, cfg APIMuxConfig) {
 		Log: cfg.Log,
 	}
 	app.Handle(http.MethodGet, "v1", "/test", tgh.Test)
+	//app.Handle(http.MethodGet, "v1", "/vars", expvar.Handler())
 }
